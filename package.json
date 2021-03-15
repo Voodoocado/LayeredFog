@@ -1,0 +1,23 @@
+{
+  "name": "com.voodoocado.layeredfog",
+  "version": "1.0.0",
+  "displayName": "Layered Fog",
+  "description": "This post process effect allows fog to be controlled in two separate layers for low hanging fog or over head fog.",
+  "unity": "2020.1",
+  "unityRelease": "16f1",
+  "keywords": [
+    "Fog",
+    "Postprocess",
+    "Shader",
+    "BRP"
+  ],
+  "author": {
+    "name": "Voodoocado",
+    "email": "",
+    "url": ""
+  },
+  "hideInEditor": false,
+  "dependencies": {
+    "com.unity.postprocessing": "3.0.0"
+  }
+}
