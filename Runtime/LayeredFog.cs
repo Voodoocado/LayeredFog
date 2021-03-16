@@ -23,7 +23,7 @@ namespace Voodoocado
         public enum LayeredFogMode
         {
             Linear = 1,
-            Exponentional = 2,
+            Exponential  = 2,
             Diminishing = 3
         };
 

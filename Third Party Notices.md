@@ -2,6 +2,6 @@ This package contains third-party software components governed by the license(s)
 
 Component Name: LayeredFog
 
-License Type: "MIT"
+License Type: "EULA"
 
-[License](https://github.com/voodoocado/LayeredFog/blob/master/LICENSE.md)
+[License](https://unity3d.com/legal/as_terms)
