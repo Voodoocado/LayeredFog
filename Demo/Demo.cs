@@ -11,7 +11,7 @@ namespace Voodoocado
         public PostProcessVolume postProcessVolume;
         public LayeredFog layeredFog;
 
-		public Moments.Recorder recorder;
+		//public Moments.Recorder recorder;
 
 		public void Start()
 		{
@@ -25,7 +25,7 @@ namespace Voodoocado
             layeredFog.fogHeightMax.value = 5f + 5f * Mathf.Sin(Time.time);
 
             // Record a GIF using Moments Recorder
-
+            /*
             if (Input.GetKeyDown(KeyCode.F4))
             {
                 print("KeyCode.F4");
@@ -45,6 +45,7 @@ namespace Voodoocado
             {
                 recorder.Save();
             }
+            */
         }
     }
 }
