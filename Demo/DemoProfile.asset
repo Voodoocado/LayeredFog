@@ -19,12 +19,12 @@ MonoBehaviour:
   layeredFogMode:
     overrideState: 1
     value: 2
-  fogDensity:
+  fogOpacity:
     overrideState: 1
     value: 1
   fogDistance:
     overrideState: 1
-    value: 1
+    value: 2
   fogColor:
     overrideState: 1
     value: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}

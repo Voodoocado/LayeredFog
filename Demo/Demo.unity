@@ -1513,6 +1513,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraRig: {fileID: 1313362464}
   mainCamera: {fileID: 1450338543}
+  postProcessVolume: {fileID: 1450338540}
+  layeredFog: {fileID: 0}
 --- !u!1 &1510396240
 GameObject:
   m_ObjectHideFlags: 0

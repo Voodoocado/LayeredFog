@@ -1,5 +1,6 @@
 
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Voodoocado
 {
@@ -7,11 +8,21 @@ namespace Voodoocado
     {
         public GameObject cameraRig;
         public Camera mainCamera;
-        //public Moments.Recorder recorder;
+        public PostProcessVolume postProcessVolume;
+        public LayeredFog layeredFog;
 
-        public void Update()
+		//public Moments.Recorder recorder;
+
+		public void Start()
+		{
+            postProcessVolume.profile.TryGetSettings<LayeredFog>(out layeredFog);
+        }
+
+		public void Update()
         {
             cameraRig.transform.Rotate(Vector3.up, Time.deltaTime * 10f);
+
+            layeredFog.fogHeightMax.value = 5f + 5f * Mathf.Sin(Time.time);
 
             // Record a GIF using Moments Recorder
             /*

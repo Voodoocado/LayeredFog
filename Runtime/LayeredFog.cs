@@ -31,7 +31,7 @@ namespace Voodoocado
         public sealed class LayeredFogModeParameter : ParameterOverride<LayeredFogMode> { }
         public LayeredFogModeParameter layeredFogMode = new LayeredFogModeParameter { value = LayeredFogMode.Linear };
         [Range(0f, 1f)]
-        public UnityEngine.Rendering.PostProcessing.FloatParameter fogDensity = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.5f };
+        public UnityEngine.Rendering.PostProcessing.FloatParameter fogOpacity = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.5f };
         public UnityEngine.Rendering.PostProcessing.FloatParameter fogDistance = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 100f };
         public UnityEngine.Rendering.PostProcessing.ColorParameter fogColor = new UnityEngine.Rendering.PostProcessing.ColorParameter { value = Color.grey };
 
@@ -71,7 +71,7 @@ namespace Voodoocado
             sheet.properties.SetFloat("_FogDensityAboveMax", settings.fogDensityAboveMax);
 
             sheet.properties.SetFloat("_FogMode", (int)settings.layeredFogMode.value);
-            sheet.properties.SetFloat("_FogDensity", settings.fogDensity);
+            sheet.properties.SetFloat("_FogOpacity", settings.fogOpacity);
             sheet.properties.SetFloat("_FogDistance", settings.fogDistance);
             sheet.properties.SetColor("_FogColor", settings.fogColor);
 

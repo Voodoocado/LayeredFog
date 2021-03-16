@@ -2,8 +2,7 @@
 {
     HLSLINCLUDE
 
-#include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
-//#include "UnityCG.cginc"
+    #include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
 
     TEXTURE2D_SAMPLER2D(_MainTex, sampler_MainTex);
     TEXTURE2D_SAMPLER2D(_CameraDepthTexture, sampler_CameraDepthTexture);
@@ -11,7 +10,7 @@
 
     float4 _FogColor;
     float _FogMode;
-    float _FogDensity;
+    float _FogOpacity;
     float _FogDistance;
     float _DebugMode;
     float _FogHeightMin;
@@ -133,7 +132,7 @@
         }
 
         // Apply the Fog
-        float finalFogAmount = saturate(_FogDensity * fogDensity * _FogColor.a);
+        float finalFogAmount = saturate(_FogOpacity * fogDensity * _FogColor.a);
         float3 finalColor =
             lerp(originalColor.rgb,
                 _FogColor.rgb,
