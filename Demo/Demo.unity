@@ -1348,6 +1348,7 @@ GameObject:
   - component: {fileID: 1450338541}
   - component: {fileID: 1450338540}
   - component: {fileID: 1450338545}
+  - component: {fileID: 1450338546}
   m_Layer: 8
   m_Name: Camera
   m_TagString: MainCamera
@@ -1515,6 +1516,27 @@ MonoBehaviour:
   mainCamera: {fileID: 1450338543}
   postProcessVolume: {fileID: 1450338540}
   layeredFog: {fileID: 0}
+  recorder: {fileID: 1450338546}
+--- !u!114 &1450338546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1450338539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5378998db5ba9488d08a4e3b80821a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 800
+  m_Height: 509
+  m_AutoAspect: 1
+  m_FramePerSecond: 15
+  m_Repeat: 0
+  m_Quality: 100
+  m_BufferSize: 5
+  WorkerPriority: 4
 --- !u!1 &1510396240
 GameObject:
   m_ObjectHideFlags: 0

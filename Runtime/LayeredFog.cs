@@ -31,7 +31,7 @@ namespace Voodoocado
         public sealed class LayeredFogModeParameter : ParameterOverride<LayeredFogMode> { }
         public LayeredFogModeParameter layeredFogMode = new LayeredFogModeParameter { value = LayeredFogMode.Linear };
         [Range(0f, 1f)]
-        public UnityEngine.Rendering.PostProcessing.FloatParameter fogOpacity = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.5f };
+        public UnityEngine.Rendering.PostProcessing.FloatParameter fogOpacity = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 1.0f };
         public UnityEngine.Rendering.PostProcessing.FloatParameter fogDistance = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 100f };
         public UnityEngine.Rendering.PostProcessing.ColorParameter fogColor = new UnityEngine.Rendering.PostProcessing.ColorParameter { value = Color.grey };
 
