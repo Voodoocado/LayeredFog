@@ -45,6 +45,17 @@ namespace Voodoocado
         [Range(0f, 1f)]
         public UnityEngine.Rendering.PostProcessing.TextureParameter clouds = new UnityEngine.Rendering.PostProcessing.TextureParameter { };
 
+        [Range(0f, 1f)]
+        public UnityEngine.Rendering.PostProcessing.FloatParameter cloudsCutoff = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.5f };
+        [Range(0f, 1f)]
+        public UnityEngine.Rendering.PostProcessing.FloatParameter cloudsHysteresis = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.1f };
+        [Range(0f, 1f)]
+        public UnityEngine.Rendering.PostProcessing.FloatParameter cloudsIntensity = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.2f };
+        [Range(0.0f, 0.01f)]
+        public UnityEngine.Rendering.PostProcessing.FloatParameter cloudsSize = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.05f };
+        [Range(0.0f, 0.1f)]
+        public UnityEngine.Rendering.PostProcessing.FloatParameter cloudsSpeed = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0.05f };
+
         [Serializable]
         public sealed class DebugModeParameter : ParameterOverride<DebugMode> { }
         public DebugModeParameter debugMode = new DebugModeParameter { value = DebugMode.None };
@@ -82,6 +93,12 @@ namespace Voodoocado
             sheet.properties.SetFloat("_FogOpacity", settings.fogOpacity);
             sheet.properties.SetFloat("_FogDistance", settings.fogDistance);
             sheet.properties.SetColor("_FogColor", settings.fogColor);
+
+            sheet.properties.SetFloat("_CloudsCutoff", settings.cloudsCutoff);
+            sheet.properties.SetFloat("_CloudsHysteresis", settings.cloudsHysteresis);
+            sheet.properties.SetFloat("_CloudsIntensity", settings.cloudsIntensity);
+            sheet.properties.SetFloat("_CloudsSize", settings.cloudsSize);
+            sheet.properties.SetFloat("_CloudsSpeed", settings.cloudsSpeed);
 
             sheet.properties.SetFloat("_DebugMode", (int)settings.debugMode.value);
 
