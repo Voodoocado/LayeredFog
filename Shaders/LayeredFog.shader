@@ -18,6 +18,7 @@
     float _FogHeightMax;
     float _FogDensityBelowMin;
     float _FogDensityAboveMax;
+    
     float4x4 _CamToWorld;
     float4x4 _ViewProjectInverse;
 
@@ -26,22 +27,6 @@
     half _CloudsIntensity;
     half _CloudsSize;
     half _CloudsSpeed;
-
-    float _LightIntensity;
-    float3 _LightDir;
-    float3 _LightColor;
-
-    float _AmbientIntensity;
-    float3 _AmbientColor;
-
-    float _SpecularIntensity;
-    float _SpecularPower;
-
-    // inverse of y = x²(3-2x)
-    float inverse_smoothstep(float x)
-    {
-        return 0.5 - sin(asin(1.0 - 2.0 * x) / 3.0);
-    }
 
     struct VertToFrag
     {
@@ -60,7 +45,6 @@
         // Figure out the camera direction
         float4 viewSpace = float4(o.texcoord.xy * 2.0 - 1.0, 1, 1);
         o.cameraDir = mul(_ViewProjectInverse, viewSpace); 
-        float3 worldSpace = mul(_CamToWorld, viewSpace).xyz;
 
         return o;
     }
@@ -125,49 +109,35 @@
                 break;
         }
 
-        //fixed4 clouds1 = tex2D(_Clouds, (IN.world.xz + IN.world.yy) * _CloudsSize); // fixed2(i.world.x, i.world.z));
-        //fixed4 clouds2 = tex2D(_Clouds, (IN.world.xz + IN.world.yy) * _CloudsSize + _CloudsSpeed * _Time.xx); // fixed2(i.world.x, i.world.z));
-        float2 clouds1uv = (worldPosition.xz + worldPosition.yy)* _CloudsSize; // fixed2(i.world.x, i.world.z));
-        float2 clouds2uv = (worldPosition.xz + worldPosition.yy) * _CloudsSize + _CloudsSpeed * _Time.xx; // fixed2(i.world.x, i.world.z));
+        // Read the cloud texture twice and add them up to give some variety
+        float2 clouds1uv = (worldPosition.xz + worldPosition.yy)* _CloudsSize; 
+        float2 clouds2uv = (worldPosition.xz + worldPosition.yy) * _CloudsSize + _CloudsSpeed * _Time.xx;
         float4 clouds1 = SAMPLE_TEXTURE2D(_CloudsTexture, sampler_CloudsTexture, clouds1uv);
         float4 clouds2 = SAMPLE_TEXTURE2D(_CloudsTexture, sampler_CloudsTexture, clouds2uv);
 
-        // float3 clouds1 = fmod(worldPosition, 1);
-        // float3 clouds2 = fmod(1.31 * worldPosition, 1);
-
-        //color.a = lerp(i.world.y / 1.0;
         float cloudFactor =
             smoothstep(_CloudsCutoff - _CloudsHysteresis, _CloudsCutoff + _CloudsHysteresis, (clouds1.r + clouds2.r) * 0.5);
         cloudFactor = 1.0 - ((1.0 - cloudFactor) * _CloudsIntensity);
         originalColor.rgb *= cloudFactor;
-
 
         // Potentially show the input
         switch (_DebugMode)
         {
         case 1:
             depth /= 100;
-            //depth = abs(100-depth);
             return float4(depth, depth, depth, 1.0);
         case 2:
-            //depth01 /= 1000;
             return float4(depth01, depth01, depth01, 1.0);
         case 3:
             return float4(normal, 1.0);
         case 4:
-            //worldPosition = (worldPosition / 1) % 1;
             worldPosition /= 10;
-            return float4(0,worldPosition.y,0, 1.0);
             return float4(fmod(worldPosition.xyz, 1), 1.0);
         case 5:
             return float4(fogDensity, fogDensity, fogDensity, 1.0);
         case 6:
-            //return float4(1,0,0,1.0) * (1 - length(i.cameraDir.xyz));
             return float4(i.cameraDir.xyz, 1.0);
-
         case 7:
-            //return float4(i.cameraDir.w, i.cameraDir.w, i.cameraDir.w, 1.0);
-
             fogTravelled /= 1;
             return float4(fogTravelled, fogTravelled, fogTravelled, 1.0);
         }
