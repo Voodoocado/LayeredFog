@@ -18,6 +18,7 @@ namespace Voodoocado
             WorldPos,
             FogDensity,
             CameraDir,
+            FogTravelled,
         };
 
         public enum LayeredFogMode
@@ -41,6 +42,8 @@ namespace Voodoocado
         public UnityEngine.Rendering.PostProcessing.FloatParameter fogDensityBelowMin = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 1f };
         [Range(0f, 1f)]
         public UnityEngine.Rendering.PostProcessing.FloatParameter fogDensityAboveMax = new UnityEngine.Rendering.PostProcessing.FloatParameter { value = 0f };
+        [Range(0f, 1f)]
+        public UnityEngine.Rendering.PostProcessing.TextureParameter clouds = new UnityEngine.Rendering.PostProcessing.TextureParameter { };
 
         [Serializable]
         public sealed class DebugModeParameter : ParameterOverride<DebugMode> { }
@@ -61,8 +64,13 @@ namespace Voodoocado
             if (depth != null)
                 sheet.properties.SetTexture("_DepthTexture", depth);
 
+            if(settings.clouds.value)
+                sheet.properties.SetTexture("_CloudsTexture", settings.clouds.value);
+
             Camera camera = Camera.main;
             sheet.properties.SetMatrix("_CamToWorld", camera.cameraToWorldMatrix);
+            Matrix4x4 m = (camera.projectionMatrix * camera.worldToCameraMatrix).inverse;
+            Vector3 test = m.MultiplyVector(Vector3.forward);
             sheet.properties.SetMatrix("_ViewProjectInverse", (camera.projectionMatrix * camera.worldToCameraMatrix).inverse);
 
             sheet.properties.SetFloat("_FogHeightMin", settings.fogHeightMin);
